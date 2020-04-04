@@ -114,6 +114,49 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:tint="@android:color/white"
+                                    app:backgroundTint="@color/blue_400"
+                                    app:elevation="0dp"
+                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
+                                    android:src="@android:color/transparent" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@android:string/ok"
+                                    android:elevation="16dp"
+                                    android:textSize="15sp"
+                                    android:id="@+id/total_total_tv"
+                                    android:textColor="@android:color/white"
+                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="Conformed"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/blue_400" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:tint="@android:color/white"
                                     app:backgroundTint="@color/yellow_600"
                                     app:elevation="0dp"
                                     app:fabSize="normal"
@@ -137,49 +180,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
                                 android:text="Active"
-                                android:textStyle="bold"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:tint="@android:color/white"
-                                    app:backgroundTint="@color/red_600"
-                                    app:elevation="0dp"
-                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="@android:string/ok"
-                                    android:elevation="16dp"
-                                    android:textSize="15sp"
-                                    android:id="@+id/deaths_total_tv"
-                                    android:textColor="@android:color/white"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                            </FrameLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Deaths"
                                 android:textStyle="bold"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
@@ -225,9 +225,76 @@
                                 android:layout_marginTop="@dimen/spacing_medium"
                                 android:text="Recovered"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/green_500" />
 
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <FrameLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:tint="@android:color/white"
+                                    app:backgroundTint="@color/red_600"
+                                    app:elevation="0dp"
+                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
+                                    android:src="@android:color/transparent" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@android:string/ok"
+                                    android:elevation="16dp"
+                                    android:textSize="15sp"
+                                    android:id="@+id/deaths_total_tv"
+                                    android:textColor="@android:color/white"
+                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                            </FrameLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/spacing_medium"
+                                android:text="Deaths"
+                                android:textStyle="bold"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/red_400" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="9dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="7dp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/state_name"
+                        android:text="Your State" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="9dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -256,7 +323,7 @@
                                     android:text="@android:string/ok"
                                     android:elevation="16dp"
                                     android:textSize="15sp"
-                                    android:id="@+id/total_total_tv"
+                                    android:id="@+id/total_state_tv"
                                     android:textColor="@android:color/white"
                                     android:textAppearance="?android:attr/textAppearanceMedium" />
                             </FrameLayout>
@@ -264,37 +331,13 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Total"
+                                android:textStyle="bold"
+                                android:text="Conformed"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/blue_400" />
 
                         </LinearLayout>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="9dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_marginLeft="7dp"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/state_name"
-                        android:text="Your State" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="9dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -355,49 +398,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:tint="@android:color/white"
-                                    app:backgroundTint="@color/red_600"
-                                    app:elevation="0dp"
-                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="@android:string/ok"
-                                    android:elevation="16dp"
-                                    android:textSize="15sp"
-                                    android:id="@+id/deaths_state_tv"
-                                    android:textColor="@android:color/white"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                            </FrameLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Deaths"
-                                android:textStyle="bold"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <FrameLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:tint="@android:color/white"
                                     app:backgroundTint="@color/light_green_400"
                                     app:elevation="0dp"
                                     app:fabSize="normal"                                    app:rippleColor="@android:color/white"
@@ -422,7 +422,7 @@
                                 android:textStyle="bold"
                                 android:text="Recovered"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/green_500" />
 
                         </LinearLayout>
 
@@ -441,7 +441,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:tint="@android:color/white"
-                                    app:backgroundTint="@color/blue_400"
+                                    app:backgroundTint="@color/red_600"
                                     app:elevation="0dp"
                                     app:fabSize="normal"                                    app:rippleColor="@android:color/white"
                                     android:src="@android:color/transparent" />
@@ -453,7 +453,7 @@
                                     android:text="@android:string/ok"
                                     android:elevation="16dp"
                                     android:textSize="15sp"
-                                    android:id="@+id/total_state_tv"
+                                    android:id="@+id/deaths_state_tv"
                                     android:textColor="@android:color/white"
                                     android:textAppearance="?android:attr/textAppearanceMedium" />
                             </FrameLayout>
@@ -462,12 +462,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Total"
+                                android:text="Deaths"
                                 android:textStyle="bold"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/red_400" />
 
                         </LinearLayout>
+
 
                     </LinearLayout>
 
