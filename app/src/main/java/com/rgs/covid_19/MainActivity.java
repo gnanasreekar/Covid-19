@@ -356,23 +356,26 @@ public class MainActivity extends AppCompatActivity {
             totalStateTv.setText(confirmed);
             activeStateTv.setText(active);
             statename.setText(state);
-            citycon.setText("Confirmed in "+sharedPreferences.getString("dist", "Guntur") + ":");
             cityconnum.setText(state_dist_data_in.getString("confirmed"));
             cases = numberFormat.parse(state_dist_data_in.getString("confirmed")).intValue();
 
-//            if (!sharedPreferences.getBoolean("firstTime", false)) {
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putBoolean("firstTime", true);
-//                editor.apply();
-//            } else {
-//
-//                if(sharedPreferences.getInt("cases", 0) < cases){
-//                    increasedialog();
-//                }
-//            }
-//            SharedPreferences.Editor editor = sharedPreferences.edit();
-//            editor.putInt("cases", cases);
-//            editor.apply();
+            if (!sharedPreferences.getBoolean("firstTime", false)) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("firstTime", true);
+                editor.apply();
+            } else {
+                if(sharedPreferences.getInt("cases", 0) < cases) {
+                    if (sharedPreferences.getString("dist", "Guntur").equals(citycon.getText())) {
+                        increasedialog();
+                    }
+                }
+                Log.d("Data123" , (String) citycon.getText());
+                Log.d("Data123" , sharedPreferences.getString("dist", "Guntur"));
+            }
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("cases", cases);
+            editor.apply();
+            citycon.setText(sharedPreferences.getString("dist", "Guntur"));
 
         } catch (JSONException | ParseException e) {
             e.printStackTrace();
@@ -409,12 +412,18 @@ public class MainActivity extends AppCompatActivity {
         dialog.setCancelable(true);
         int num = cases - sharedPreferences.getInt("cases", 0);
         TextView cas = dialog.findViewById(R.id.casesadded);
-        cas.setText("There have been " + num +" cases in "+ sharedPreferences.getString("dist", "Guntur") + " since the last time you've opened the app");
+
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("flag", (String) cas.getText());
+        editor.apply();
+
+        cas.setText("There have been " + num +" cases in "+ sharedPreferences.getString("dist", "Guntur") + " since the last time you've opened the app");
         ((AppCompatButton) dialog.findViewById(R.id.bt_close)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

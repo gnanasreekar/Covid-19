@@ -11,10 +11,14 @@
         android:roundIcon="@drawable/ic_virus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Feedback"></activity>
-        <activity android:name=".dist.Dist" />
-        <activity android:name=".About" />
-        <activity android:name=".Stateselect" />
+        <activity android:name=".Feedback"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".dist.Dist"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".About"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Stateselect"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
