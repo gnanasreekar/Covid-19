@@ -4,13 +4,19 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,8 +35,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,12 +71,18 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private NotificationManagerCompat notificationManager;
+
+    private final String CHANNEL_ID = "simple notification";
+    private final int NOTIFICATION_ID = 1000;
 
     ArrayList<String> statelist = new ArrayList<String>();
     ArrayList<String> statedislist = new ArrayList<String>();
     private List<MOdel> states;
 
     String myResponse;
+    private AdView mAdView;
+
 
     private TextView activeTotalTv;
     private TextView deathsTotalTv;
@@ -92,7 +110,16 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         states = new ArrayList<>();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-      //  startActivity(new Intent(MainActivity.this , Stateselect.class));
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        //  MobileAds.initialize(this, "ca-app-pub-4057093668636373~8007114541");
+        //  startActivity(new Intent(MainActivity.this , Stateselect.class));
 
         sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
         rv = (RecyclerView) findViewById(R.id.recview);
@@ -143,19 +170,6 @@ public class MainActivity extends AppCompatActivity {
 
                             final JSONObject jsonObject = new JSONObject(myResponse);
 
-                            JSONArray jsonArray = jsonObject.getJSONArray("key_values");
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-
-                                JSONObject details = jsonArray.getJSONObject(i);
-                                String confirmeddelta = details.getString("confirmeddelta");
-                                String counterforautotimeupdate = details.getString("counterforautotimeupdate");
-                                String deceaseddelta = details.getString("deceaseddelta");
-                                String lastupdatedtime = details.getString("lastupdatedtime");
-                                String recovereddelta = details.getString("recovereddelta");
-                                String statesdelta = details.getString("statesdelta");
-
-                            }
 
                             JSONObject valuesarray = jsonObject.getJSONObject("total_values");
                             String active = valuesarray.getString("active");
@@ -216,8 +230,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        createNotificationChannels();
 
     }
+
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+           CharSequence charSequence = "Notification";
+           String notidisc = "Noti disc";
+           NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID,charSequence, NotificationManager.IMPORTANCE_DEFAULT);
+           notificationChannel.setDescription(notidisc);
+
+           NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+           notificationManager.createNotificationChannel(notificationChannel);
+        }
+
+        createNotificationChannels();
+
+    }
+
 
     public void stateselectdialog() {
         final Dialog dialog = new Dialog(this);
@@ -369,8 +401,7 @@ public class MainActivity extends AppCompatActivity {
                         increasedialog();
                     }
                 }
-                Log.d("Data123" , (String) citycon.getText());
-                Log.d("Data123" , sharedPreferences.getString("dist", "Guntur"));
+
             }
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("cases", cases);
@@ -449,6 +480,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, Feedback.class));
         } else if (item.getItemId() == R.id.about){
             startActivity(new Intent(MainActivity.this, About.class));
+        } else if (item.getItemId() == R.id.noti){
+            noti();
         }
         return super.onOptionsItemSelected(item);
     }
