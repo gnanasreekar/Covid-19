@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/spacing_large">
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,9 +34,77 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="State"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textSize="17sp"
                     android:textColor="@color/green_400"
                     android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="↑"
+                        android:id="@+id/rec_arrow1"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue_500" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:text="0"
+                        android:layout_marginLeft="2dp"
+                        android:id="@+id/rec_delataincrease_dist"
+                        android:textColor="@color/blue_500" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="↑"
+                        android:id="@+id/rec_arrow2"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/green_500" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="0"
+                        android:layout_marginLeft="2dp"
+                        android:textSize="15sp"
+                        android:id="@+id/rec_recovered_delataincrease_dist"
+                        android:textColor="@color/green_500" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="↑"
+                        android:id="@+id/rec_arrow3"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/red_500" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="0"
+                        android:layout_marginLeft="2dp"
+                        android:textSize="15sp"
+                        android:id="@+id/rec_deathgs_delataincrease_dist"
+                        android:textColor="@color/red_500" />
+
+
+                </LinearLayout>
 
 
             </LinearLayout>

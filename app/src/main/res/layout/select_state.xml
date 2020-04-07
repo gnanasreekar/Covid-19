@@ -44,7 +44,9 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
-        <androidx.appcompat.widget.AppCompatButton
+
+
+        <Button
             android:id="@+id/bt_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

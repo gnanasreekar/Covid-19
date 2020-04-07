@@ -44,13 +44,33 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         final String deaths = ld.getDeaths();
         final String total = ld.getConfirmed();
         final String state = ld.getState();
+        final String deltaconformed = ld.getDeltaconformed();
+        final String deltadeaths = ld.getDeltadeath();
+        final String deltarecovered = ld.getDeltarecovered();
 
+        if (deltaconformed.equals("0")){
+            holder.rec_delta_conformed.setVisibility(View.GONE);
+            holder.recArrow1.setVisibility(View.GONE);
+        }
+
+        if (deltarecovered.equals("0")){
+            holder.rec_delta_recovered.setVisibility(View.GONE);
+            holder.recArrow2.setVisibility(View.GONE);
+        }
+
+        if (deltadeaths.equals("0")){
+            holder.rec_delta_deaths.setVisibility(View.GONE);
+            holder.recArrow3.setVisibility(View.GONE);
+        }
+
+        holder.rec_delta_conformed.setText(deltaconformed);
+        holder.rec_delta_recovered.setText(deltarecovered);
+        holder.rec_delta_deaths.setText(deltadeaths);
         holder.recViewActive.setText("Active: "+active);
         holder.recViewDeath.setText("Deaths: "+deaths);
         holder.recViewRecovered.setText("Recovered: "+recovered);
         holder.statenameRec.setText(state);
         holder.recViewTotal.setText("Total: "+total);
-
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +100,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private TextView recViewActive;
         private RelativeLayout recViewLayoutDeath;
         private TextView recViewDeath;
+        private TextView rec_delta_conformed;
+        private TextView rec_delta_recovered;
+        private TextView rec_delta_deaths;
+        private TextView recArrow1;
+        private TextView recArrow2;
+        private TextView recArrow3;
+
+
+
 
 
         public ViewHolder(View itemView) {
@@ -95,6 +124,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             recViewLayoutDeath = itemView.findViewById(R.id.rec_view_layout_death);
             recViewDeath = itemView.findViewById(R.id.rec_view_death);
             cardView = itemView.findViewById(R.id.card_view);
+            rec_delta_conformed = itemView.findViewById(R.id.rec_delataincrease_dist);
+            rec_delta_recovered = itemView.findViewById(R.id.rec_recovered_delataincrease_dist);
+            rec_delta_deaths = itemView.findViewById(R.id.rec_deathgs_delataincrease_dist);
+            recArrow1 = itemView.findViewById(R.id.rec_arrow1);
+            recArrow2 = itemView.findViewById(R.id.rec_arrow2);
+            recArrow3 = itemView.findViewById(R.id.rec_arrow3);
+
 
 
         }

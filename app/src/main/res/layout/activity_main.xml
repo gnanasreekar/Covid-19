@@ -30,7 +30,7 @@
             app:subtitle="welcome to Covid-19 tracker for India"
             app:subtitleTextAppearance="@style/Base.TextAppearance.AppCompat.Caption"
             app:subtitleTextColor="@color/grey_10"
-            app:title="Hello," />
+            app:title="Hey," />
 
     </RelativeLayout>
 
@@ -73,13 +73,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:text="Total India" />
-
                         <TextView
                             android:id="@+id/lastupdated"
                             android:layout_width="0dp"
@@ -88,6 +81,80 @@
                             android:singleLine="true"
                             android:gravity="right"
                             android:text="Last Updated" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:textStyle="bold"
+                        android:layout_height="wrap_content"
+                        android:text="Total India Today" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="↑"
+                            android:id="@+id/arrow1"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/blue_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="0"
+                            android:layout_marginLeft="2dp"
+                            android:id="@+id/todaysindia"
+                            android:textSize="15sp"
+                            android:textColor="@color/blue_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="↑"
+                            android:textStyle="bold"
+                            android:id="@+id/arrow2"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/green_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="0"
+                            android:layout_marginLeft="2dp"
+                            android:textSize="15sp"
+                            android:id="@+id/recovered_delataincrease"
+                            android:textColor="@color/green_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="↑"
+                            android:textStyle="bold"
+                            android:id="@+id/arrow3"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/red_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:text="0"
+                            android:layout_marginLeft="2dp"
+                            android:id="@+id/deathgs_delataincrease"
+                            android:textColor="@color/red_500" />
 
                     </LinearLayout>
                     <View
@@ -124,7 +191,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="@android:string/ok"
+                                    android:text="0"
                                     android:elevation="16dp"
                                     android:textSize="15sp"
                                     android:id="@+id/total_total_tv"
@@ -137,7 +204,7 @@
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Conformed"
+                                android:text="Confirmed"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/blue_400" />
 
@@ -168,7 +235,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="2000"
+                                    android:text="0"
                                     android:textSize="15sp"
                                     android:elevation="16dp"
                                     android:id="@+id/active_total_tv"
@@ -211,7 +278,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="@android:string/ok"
+                                    android:text="0"
                                     android:elevation="16dp"
                                     android:textSize="15sp"
                                     android:id="@+id/recovered_total_tv"
@@ -254,7 +321,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="@android:string/ok"
+                                    android:text="0"
                                     android:elevation="16dp"
                                     android:textSize="15sp"
                                     android:id="@+id/deaths_total_tv"
@@ -277,15 +344,99 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="9dp" />
+                        android:layout_height="4dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/lastupdated_dist"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:gravity="right"
+                            android:text="Last Updated" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_marginLeft="7dp"
                         android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:id="@+id/state_name"
                         android:text="Your State" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="↑"
+                        android:textStyle="bold"
+                        android:id="@+id/arrow4"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="2dp"
+                            android:text="0"
+                            android:id="@+id/delataincrease_dist"
+                            android:textColor="@color/blue_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="↑"
+                            android:id="@+id/arrow5"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/green_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="2dp"
+                            android:text="0"
+                            android:id="@+id/recovered_delataincrease_dist"
+                            android:textColor="@color/green_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="↑"
+                            android:id="@+id/arrow6"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/red_500" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="2dp"
+                            android:text="0"
+                            android:id="@+id/deathgs_delataincrease_dist"
+                            android:textColor="@color/red_500" />
+
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -321,7 +472,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="@android:string/ok"
+                                    android:text="0"
                                     android:elevation="16dp"
                                     android:textSize="15sp"
                                     android:id="@+id/total_state_tv"
@@ -334,7 +485,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
                                 android:textStyle="bold"
-                                android:text="Conformed"
+                                android:text="Confirmed"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/blue_400" />
 
@@ -365,7 +516,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="2000"
+                                    android:text="0"
                                     android:textSize="15sp"
                                     android:elevation="16dp"
                                     android:id="@+id/active_state_tv"
@@ -408,7 +559,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="@android:string/ok"
+                                    android:text="0"
                                     android:elevation="16dp"
                                     android:textSize="15sp"
                                     android:id="@+id/recovered_state_tv"
@@ -451,7 +602,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="@android:string/ok"
+                                    android:text="0"
                                     android:elevation="16dp"
                                     android:textSize="15sp"
                                     android:id="@+id/deaths_state_tv"
@@ -471,15 +622,17 @@
                         </LinearLayout>
 
 
+
+
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="15dp" />
+                        android:layout_height="10dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/spacing_xmlarge"
+                        android:layout_height="20dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -488,7 +641,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Conformed in "
+                            android:text="Confirmed in "
                             android:layout_marginLeft="7dp"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                             android:textColor="@color/grey_60" />
@@ -509,7 +662,7 @@
                             android:textStyle="bold"
                             android:id="@+id/city_conformed_num"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                            android:textColor="@color/red_200" />
+                            android:textColor="@color/blue_500" />
 
                         <View
                             android:layout_width="@dimen/spacing_large"
@@ -521,21 +674,9 @@
 
             </androidx.cardview.widget.CardView>
 
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_alignParentBottom="true"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ad_unit_id">
-            </com.google.android.gms.ads.AdView>
-
             <View
                 android:layout_width="0dp"
-                android:layout_height="7dp" />
+                android:layout_height="3dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"

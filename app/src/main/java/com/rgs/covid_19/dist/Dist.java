@@ -46,6 +46,9 @@ public class Dist extends AppCompatActivity {
             for (String key : iterate(state_data_in.keys())) {
                 Log.d("ASDF" , key);
                 JSONObject state_dist_data = state_data_in.getJSONObject(key);
+//                JSONObject detla = state_dist_data.getJSONObject("delta");
+//                String detla_confor = detla.getString("confirmed");
+//                Log.d("Helloooo" , detla_confor);
                 String confirmed = state_dist_data.getString("confirmed");
                 dist.add(new Model_dist(confirmed, key));
                 adapter.setlist(dist);
