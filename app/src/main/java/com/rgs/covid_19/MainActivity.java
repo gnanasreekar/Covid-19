@@ -1,19 +1,10 @@
 package com.rgs.covid_19;
 
-import androidx.annotation.LongDef;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.AlarmManager;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +26,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -43,12 +40,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.annotation.Target;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -60,16 +55,11 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import smartdevelop.ir.eram.showcaseviewlib.GuideView;
-import smartdevelop.ir.eram.showcaseviewlib.config.DismissType;
-import smartdevelop.ir.eram.showcaseviewlib.config.Gravity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String CHANNEL_ID = "simple notification";
-
-    ArrayList<String> list_state_wise = new ArrayList<String>();
-    ArrayList<String> list_dist_wise = new ArrayList<String>();
+    ArrayList<String> list_state_wise = new ArrayList<>();
+    ArrayList<String> list_dist_wise = new ArrayList<>();
     private List<MOdel> states;
 
     String myResponse, world_myResponse;
@@ -82,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
     int cases;
-    private FirebaseAnalytics mFirebaseAnalytics;
     private TextView delta_india_confirmed;
     private TextView delta_state_confirmed;
     private TextView delta_india_recovered;
@@ -124,21 +113,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         states = new ArrayList<>();
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-    //    startService(new Intent(getBaseContext(), Increasesercive.class));
-
-
+        //    startService(new Intent(getBaseContext(), Increasesercive.class));
         //  MobileAds.initialize(this, "ca-app-pub-4057093668636373~8007114541");
         formatter = new DecimalFormat("#,###,###");
 
         lytProgress = findViewById(R.id.lyt_progress);
         sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
         editor = sharedPreferences.edit();
-        rv = (RecyclerView) findViewById(R.id.recview);
+        rv =  findViewById(R.id.recview);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyAdapter(MainActivity.this);
@@ -193,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             world_myResponse = sharedPreferences.getString("world_response", "");
             dataset();
             worlddataset();
-            Toasty.warning(this, "Internet not available, Showing previous data ", Toast.LENGTH_LONG, true).show();
+            Toasty.error(this, "Internet not available, Showing previous data ", Toast.LENGTH_LONG, true).show();
         } else {
 
             OkHttpClient world_client = new OkHttpClient();
@@ -324,6 +311,7 @@ public class MainActivity extends AppCompatActivity {
             worldLayout.setVisibility(View.GONE);
             editor.putBoolean("worldlayout" , false);
             menu.findItem(R.id.disableworld).setTitle("Enable World Stats?");
+            Toasty.info(this, "World Data hidden ", Toast.LENGTH_SHORT, true).show();
         } else {
             worldLayout.setVisibility(View.VISIBLE);
             editor.putBoolean("worldlayout" , true);
@@ -428,9 +416,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
+                } catch (JSONException | ParseException e) {
                     e.printStackTrace();
                 }
 
@@ -438,7 +424,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //Checking for internet
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -450,6 +435,7 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence charSequence = "Notification";
             String notidisc = "Noti disc";
+            String CHANNEL_ID = "simple notification";
             NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, charSequence, NotificationManager.IMPORTANCE_DEFAULT);
             notificationChannel.setDescription(notidisc);
 
@@ -681,8 +667,6 @@ public class MainActivity extends AppCompatActivity {
                     rv.setAdapter(adapter);
                     list_dist_wise.add(key);
                 }
-
-
             }
 
         } catch (JSONException e) {
