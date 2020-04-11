@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
@@ -98,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView worldDeaths;
     private TextView newArrow1;
     private TextView newWorldConfirmed;
-    private TextView newArrow2;
-    private TextView newWorldRecovered;
     private TextView newArrow3;
     private TextView newWorldDeaths;
     CharSequence s;
@@ -118,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
         states = new ArrayList<>();
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        //    startService(new Intent(getBaseContext(), Increasesercive.class));
-        //  MobileAds.initialize(this, "ca-app-pub-4057093668636373~8007114541");
         formatter = new DecimalFormat("#,###,###");
 
         lytProgress = findViewById(R.id.lyt_progress);
@@ -160,8 +157,6 @@ public class MainActivity extends AppCompatActivity {
 
         newArrow1 = findViewById(R.id.new_arrow1);
         newWorldConfirmed = findViewById(R.id.new_world_confirmed);
-        newArrow2 = findViewById(R.id.new_arrow2);
-        newWorldRecovered = findViewById(R.id.new_world_recovered);
         newArrow3 = findViewById(R.id.new_arrow3);
         newWorldDeaths = findViewById(R.id.new_world_deaths);
         worldLayout = findViewById(R.id.world_layout);
@@ -173,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
         arrow4 = findViewById(R.id.arrow4);
         arrow5 = findViewById(R.id.arrow5);
         arrow6 = findViewById(R.id.arrow6);
+
 
         //Checking for Internet
         if (!isNetworkAvailable()) {
@@ -186,8 +182,10 @@ public class MainActivity extends AppCompatActivity {
             OkHttpClient world_client = new OkHttpClient();
 
             Request world_request = new Request.Builder()
-                    .url("https://api.covid19api.com/summary")
+                    .url("https://corona-virus-world-and-india-data.p.rapidapi.com/api")
                     .get()
+                    .addHeader("x-rapidapi-host", "corona-virus-world-and-india-data.p.rapidapi.com")
+                    .addHeader("x-rapidapi-key", "181e3419demshd0ce128fad4555cp134882jsn58cb1669cb39")
                     .build();
 
             world_client.newCall(world_request).enqueue(new Callback() {
@@ -245,10 +243,6 @@ public class MainActivity extends AppCompatActivity {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("Firebaseeeeeeeeeeeee", "Refreshed token: " + refreshedToken);
 
-
-
-
-
     }
 
     public void worlddataset(){
@@ -261,22 +255,16 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
                     JSONObject jsonObject = new JSONObject(world_myResponse);
-                    JSONObject global = jsonObject.getJSONObject("Global");
-                    String world_deaths = global.getString("TotalDeaths");
-                    String world_recovered = global.getString("TotalRecovered");
-                    String world_confirmed = global.getString("TotalConfirmed");
-                    String world_new_deaths = global.getString("NewDeaths");
-                    String world_new_recovered = global.getString("NewRecovered");
-                    String world_new_confirmed = global.getString("NewConfirmed");
+                    JSONObject global = jsonObject.getJSONObject("world_total");
+                    String world_deaths = global.getString("total_deaths");
+                    String world_recovered = global.getString("total_recovered");
+                    String world_confirmed = global.getString("total_cases");
+                    String world_new_deaths = global.getString("new_deaths");
+                    String world_new_confirmed = global.getString("new_cases");
 
                     if (world_new_deaths.equals("0")) {
                         newWorldDeaths.setVisibility(View.GONE);
                         newArrow3.setVisibility(View.GONE);
-                    }
-
-                    if (world_new_recovered.equals("0")) {
-                        newWorldRecovered.setVisibility(View.GONE);
-                        newArrow2.setVisibility(View.GONE);
                     }
 
                     if (world_new_confirmed.equals("0")) {
@@ -291,7 +279,6 @@ public class MainActivity extends AppCompatActivity {
                         worldConfirmed.setText(formatter.format(numberFormat.parse(world_confirmed).intValue()));
                         worldRecovered.setText(formatter.format(numberFormat.parse(world_recovered).intValue()));
                         newWorldDeaths.setText(formatter.format(numberFormat.parse(world_new_deaths).intValue()));
-                        newWorldRecovered.setText(formatter.format(numberFormat.parse(world_new_recovered).intValue()));
                         newWorldConfirmed.setText(formatter.format(numberFormat.parse(world_new_confirmed).intValue()));
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -321,8 +308,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void dataset(){
-
-
 
         MainActivity.this.runOnUiThread(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)

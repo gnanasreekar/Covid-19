@@ -27,20 +27,17 @@ import es.dmoral.toasty.Toasty;
 
 public class Dist extends AppCompatActivity {
 
-    private MyAdapter_dist adapter;
-    private RecyclerView rv;
-    private List<Model_dist> dist;
     SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dist);
-        dist = new ArrayList<>();
-        rv =  findViewById(R.id.dist_rec);
+        List<Model_dist> dist = new ArrayList<>();
+        RecyclerView rv = findViewById(R.id.dist_rec);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyAdapter_dist(Dist.this);
+        MyAdapter_dist adapter = new MyAdapter_dist(Dist.this);
         sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
         try {
             JSONObject jsonObject = new JSONObject(sharedPreferences.getString("data", "Guntur"));
