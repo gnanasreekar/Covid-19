@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -24,7 +25,7 @@
             android:padding="10dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -33,7 +34,6 @@
                     android:id="@+id/statename_rec"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="State"
                     android:textSize="17sp"
                     android:textColor="@color/green_400"
                     android:textStyle="bold" />
@@ -46,11 +46,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="↑"
+                        android:text="@string/arrowup"
                         android:id="@+id/rec_arrow1"
                         android:textStyle="bold"
                         android:textSize="20sp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:textColor="@color/blue_500" />
 
                     <TextView
@@ -58,27 +58,27 @@
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
                         android:textSize="15sp"
-                        android:text="0"
-                        android:layout_marginLeft="2dp"
+                        android:text="@string/zero"
+                        android:layout_marginStart="2dp"
                         android:id="@+id/rec_delataincrease_dist"
                         android:textColor="@color/blue_500" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="↑"
+                        android:text="@string/arrowup"
                         android:id="@+id/rec_arrow2"
                         android:textStyle="bold"
                         android:textSize="20sp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:textColor="@color/green_500" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="0"
-                        android:layout_marginLeft="2dp"
+                        android:text="@string/zero"
+                        android:layout_marginStart="2dp"
                         android:textSize="15sp"
                         android:id="@+id/rec_recovered_delataincrease_dist"
                         android:textColor="@color/green_500" />
@@ -86,19 +86,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="↑"
+                        android:text="@string/arrowup"
                         android:id="@+id/rec_arrow3"
                         android:textStyle="bold"
                         android:textSize="20sp"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:textColor="@color/red_500" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:text="0"
-                        android:layout_marginLeft="2dp"
+                        android:text="@string/zero"
+                        android:layout_marginStart="2dp"
                         android:textSize="15sp"
                         android:id="@+id/rec_deathgs_delataincrease_dist"
                         android:textColor="@color/red_500" />
@@ -112,7 +112,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -129,7 +129,6 @@
                         android:id="@+id/rec_view_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total:"
                         android:textSize="12sp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                         android:textColor="@android:color/white" />
@@ -145,7 +144,7 @@
                     android:id="@+id/rec_view_layout_recovered"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:background="@drawable/shape_rounded_lgreen"
                     android:paddingLeft="@dimen/spacing_xmedium"
                     android:paddingTop="@dimen/spacing_small"
@@ -157,7 +156,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Recovered:"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                         android:textColor="@color/dark" />
 
@@ -187,7 +185,6 @@
                         android:id="@+id/rec_view_active"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Active:"
                         android:textSize="12sp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                         android:textColor="@color/dark" />
@@ -212,7 +209,6 @@
                         android:id="@+id/rec_view_death"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Deaths:"
                         android:textSize="12sp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                         android:textColor="@android:color/white" />
@@ -222,22 +218,22 @@
 
             <View
                 android:layout_width="1dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:layout_height="match_parent"
                 android:background="@color/grey_20" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
-                android:id="@+id/graph_tutorial"
                 android:layout_height="match_parent" >
 
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_arrow_forward_black_24dp" />
+                    android:src="@drawable/ic_arrow_forward_black_24dp"
+                    tools:ignore="ContentDescription" />
 
             </LinearLayout>
 

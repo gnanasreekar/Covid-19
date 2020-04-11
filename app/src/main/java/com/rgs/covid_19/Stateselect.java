@@ -70,99 +70,28 @@ public class Stateselect extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void run() {
-//                        TextView tv = findViewById(R.id.tv);
-//                        tv.setTextIsSelectable(true);
-//                        tv.setMovementMethod(new ScrollingMovementMethod());
-//                        tv.setText(myResponse);
-                        Log.d("Suppose", myResponse);
+
                         try {
 
                             final JSONObject jsonObject = new JSONObject(myResponse);
-//                            Iterator<String> iter = jsonObject.keys();
-//                            while(iter.hasNext()) {
-//                                String key = iter.next();
-//                                Log.d("Suppose" , iter.next());
-//                            }
-                            JSONArray jsonArray = jsonObject.getJSONArray("key_values");
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-
-                                JSONObject details = jsonArray.getJSONObject(i);
-                                String confirmeddelta = details.getString("confirmeddelta");
-                                String counterforautotimeupdate = details.getString("counterforautotimeupdate");
-                                String deceaseddelta = details.getString("deceaseddelta");
-                                String lastupdatedtime = details.getString("lastupdatedtime");
-                                String recovereddelta = details.getString("recovereddelta");
-                                String statesdelta = details.getString("statesdelta");
-
-
-
-                                Log.d("Suppose", confirmeddelta);
-                                Log.d("Suppose", counterforautotimeupdate);
-                                Log.d("Suppose", deceaseddelta);
-                                Log.d("Suppose", lastupdatedtime);
-                                Log.d("Suppose", recovereddelta);
-                                Log.d("Suppose", statesdelta);
-
-                            }
-
-
-//                            Iterator<String> iter = jsonObject.keys();
-//                            while(iter.hasNext()) {
-//                                String key = iter.next();
-//                                Log.d("Suppose" , iter.next());
-//                            }
-                            JSONObject valuesarray = jsonObject.getJSONObject("total_values");
-                            String active = valuesarray.getString("active");
-                            String confirmed = valuesarray.getString("confirmed");
-                            String deaths = valuesarray.getString("deaths");
-                            String deltaconfirmed = valuesarray.getString("deltaconfirmed");
-                            String deltadeaths = valuesarray.getString("deltadeaths");
-                            String deltarecovered = valuesarray.getString("deltarecovered");
-                            String lastupdatedtime = valuesarray.getString("lastupdatedtime");
-                            String recovered = valuesarray.getString("recovered");
-                            String state = valuesarray.getString("state");
-                            String statecode = valuesarray.getString("statecode");
-
-
-                            Log.d("Suppose123", active);
-
 
                             try {
                                 JSONObject state_wise = jsonObject.getJSONObject("state_wise");
 
                                 for (String key : iterate(state_wise.keys())) {
                                     statelist.add(key);
-                                    Log.d("Suppose", key);
                                 }
                                 stateselectdialog();
-                                Log.d("Supposelen", statelist.size() + "");
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-
-                            try {
-
-                                JSONObject state_wise = jsonObject.getJSONObject("state_wise");
-                                JSONObject state_data = state_wise.getJSONObject("Andhra Pradesh");
-                                JSONObject state_data_in = state_data.getJSONObject("district");
-                                for (String key : iterate(state_data_in.keys())) {
-
-                                    Log.d("Supposelast", key);
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-
-                        Log.d("Rapidapi", myResponse);
                     }
                 });
 

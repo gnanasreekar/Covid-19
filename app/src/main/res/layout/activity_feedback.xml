@@ -31,7 +31,7 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="@string/name"
                     android:textColor="@android:color/white"
                     android:theme="@style/EditText.Yellow" />
 
@@ -50,7 +50,7 @@
                     android:id="@+id/phonenumner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone number"
+                    android:hint="@string/phone_number"
                     android:inputType="phone"
                     android:textColor="@android:color/white"
                     android:theme="@style/EditText.Yellow" />
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:gravity="top"
-                    android:hint="Message"
+                    android:hint="@string/message"
                     android:inputType="textMultiLine"
                     android:maxLines="12"
                     android:minLines="7"
@@ -98,7 +98,7 @@
                 android:background="@drawable/btn_rounded_green"
                 android:paddingLeft="@dimen/spacing_mlarge"
                 android:paddingRight="@dimen/spacing_mlarge"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>

@@ -1,5 +1,24 @@
 <resources>
     <string name="app_name">Covid-19 India Tracker</string>
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="arrowup">↑</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="active">Active</string>
+    <string name="recovered">Recovered</string>
+    <string name="deaths">Deaths</string>
+    <string name="zero">0</string>
+    <string name="loading">Loading…</string>
+    <string name="world">World :</string>
+    <string name="last_updated">Last Updated</string>
+    <string name="your_state">Your State</string>
+    <string name="total_india_today">Total India Today</string>
+    <string name="confirmed_in">Confirmed in</string>
+    <string name="guntur">Guntur</string>
+    <string name="getting_data">Getting Data…</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="message">Message</string>
+    <string name="submit">Submit</string>
+    <string name="state">State</string>
+    <string name="total">Total:</string>
 
 </resources>

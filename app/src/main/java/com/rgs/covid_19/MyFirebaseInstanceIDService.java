@@ -1,18 +1,10 @@
 package com.rgs.covid_19;
 
-import android.app.Notification;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -24,7 +16,6 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService  {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
-        Log.d("Firebaseeeeeeeeeeee", s);
     }
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -38,22 +29,13 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService  {
             notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());
         }
 
-
-
-
         Log.i("PVL", "MESSAGE RECEIVED!!");
-//        if (remoteMessage.getData() != null) {
-//            String title = remoteMessage.getData().get("title");
-//            String body = remoteMessage.getData().get("body");
-//
-//            Log.i("PVL", title);
-//            Log.i("PVL", body);
-//        }
-        if (remoteMessage.getNotification().getBody() != null) {
-            Log.i("PVL1", "RECEIVED MESSAGE: " + remoteMessage.getNotification().getTitle());
-            Log.i("PVL2", "RECEIVED MESSAGE: " + remoteMessage.getNotification().getBody());
-        } else {
-            Log.i("PVL3", "RECEIVED MESSAGE2: " + remoteMessage.getData().get("message"));
+        if (remoteMessage.getData().get("title") != null) {
+            String title = remoteMessage.getData().get("title");
+          //  String body = remoteMessage.getData().get("body");
+
+            Log.i("PVL", title);
+           // Log.i("PVL", body);
         }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:background="@color/dark"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -18,7 +18,8 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/world_map"
-            android:tint="@color/overlay_light_30" />
+            android:tint="@color/overlay_light_30"
+            tools:ignore="ContentDescription" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -35,7 +36,6 @@
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="-36dp"
@@ -56,8 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_middle"
-                android:layout_marginRight="@dimen/spacing_middle"
                 android:layout_marginTop="-35dp"
+                android:layout_marginRight="@dimen/spacing_middle"
                 android:visibility="visible"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="2dp">
@@ -69,103 +69,285 @@
                     android:padding="@dimen/spacing_middle">
 
                     <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/world_layout"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="7dp"
+                                android:text="@string/world"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/new_arrow1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="@string/arrowup"
+                                android:textColor="@color/blue_500"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/new_world_confirmed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:text="@string/zero"
+                                android:textColor="@color/blue_500"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/new_arrow2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="@string/arrowup"
+                                android:textColor="@color/green_500"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/new_world_recovered"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:text="@string/zero"
+                                android:textColor="@color/green_500"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/new_arrow3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="@string/arrowup"
+                                android:textColor="@color/red_500"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/new_world_deaths"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="2dp"
+                                android:text="@string/zero"
+                                android:textColor="@color/red_500"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:orientation="horizontal"
+                            android:baselineAligned="false">
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_weight="1"
+                                android:gravity="start"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginStart="20dp"
+                                    android:text="@string/confirmed"
+                                    android:textColor="@color/blue_400"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:text="@string/recovered"
+                                    android:layout_marginStart="20dp"
+                                    android:textColor="@color/green_500"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:text="@string/deaths"
+                                    android:layout_marginStart="20dp"
+                                    android:textColor="@color/red_400"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/world_confirmed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginEnd="30dp"
+                                    android:text="@string/loading"
+                                    android:textColor="@color/blue_400"
+                                     />
+
+                                <TextView
+                                    android:id="@+id/world_recovered"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/loading"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:layout_marginEnd="30dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/green_500"
+                                   />
+
+                                <TextView
+                                    android:id="@+id/world_deaths"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="@dimen/spacing_medium"
+                                    android:text="@string/loading"
+                                    android:layout_marginEnd="30dp"
+                                    android:textColor="@color/red_600"
+                                     />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/lastupdated"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="end"
                             android:singleLine="true"
-                            android:gravity="right"
-                            android:text="Last Updated" />
+                            android:text="@string/last_updated" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:text="Total India Today" />
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="↑"
+                            android:layout_marginStart="7dp"
+                            android:text="@string/total_india_today"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/arrow1"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="5dp"
-                            android:textColor="@color/blue_500" />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="0"
-                            android:layout_marginLeft="2dp"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/arrowup"
+                            android:textColor="@color/blue_500"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/todaysindia"
-                            android:textSize="15sp"
-                            android:textColor="@color/blue_500" />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="↑"
-                            android:textStyle="bold"
+                            android:layout_marginStart="2dp"
+                            android:text="@string/zero"
+                            android:textColor="@color/blue_500"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/arrow2"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="5dp"
-                            android:textColor="@color/green_500" />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:text="0"
-                            android:layout_marginLeft="2dp"
-                            android:textSize="15sp"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/arrowup"
+                            android:textColor="@color/green_500"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/recovered_delataincrease"
-                            android:textColor="@color/green_500" />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="↑"
-                            android:textStyle="bold"
-                            android:id="@+id/arrow3"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="5dp"
-                            android:textColor="@color/red_500" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:layout_marginStart="2dp"
+                            android:text="@string/zero"
+                            android:textColor="@color/green_500"
                             android:textSize="15sp"
-                            android:text="0"
-                            android:layout_marginLeft="2dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/arrow3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/arrowup"
+                            android:textColor="@color/red_500"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/deathgs_delataincrease"
-                            android:textColor="@color/red_500" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="@string/zero"
+                            android:textColor="@color/red_500"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="9dp" />
+                        android:layout_height="5dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -181,32 +363,33 @@
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
                                     app:backgroundTint="@color/blue_400"
                                     app:elevation="0dp"
-                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
+                                    app:fabSize="normal"
+                                    app:rippleColor="@android:color/white" />
 
                                 <TextView
+                                    android:id="@+id/total_total_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="0"
                                     android:elevation="16dp"
-                                    android:textSize="15sp"
-                                    android:id="@+id/total_total_tv"
+                                    android:text="@string/zero"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
                                     android:textColor="@android:color/white"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                                    android:textSize="15sp" />
                             </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Confirmed"
+                                android:text="@string/confirmed"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/blue_400" />
+                                android:textColor="@color/blue_400"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -224,33 +407,33 @@
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
                                     app:backgroundTint="@color/yellow_600"
                                     app:elevation="0dp"
                                     app:fabSize="normal"
-                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
+                                    app:rippleColor="@android:color/white" />
 
                                 <TextView
+                                    android:id="@+id/active_total_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="0"
-                                    android:textSize="15sp"
                                     android:elevation="16dp"
-                                    android:id="@+id/active_total_tv"
+                                    android:text="@string/zero"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
                                     android:textColor="@color/dark"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                                    android:textSize="15sp" />
                             </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Active"
-                                android:textStyle="bold"
+                                android:text="@string/active"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/grey_40"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -268,32 +451,33 @@
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
                                     app:backgroundTint="@color/light_green_400"
                                     app:elevation="0dp"
-                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
+                                    app:fabSize="normal"
+                                    app:rippleColor="@android:color/white" />
 
                                 <TextView
+                                    android:id="@+id/recovered_total_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="0"
                                     android:elevation="16dp"
-                                    android:textSize="15sp"
-                                    android:id="@+id/recovered_total_tv"
+                                    android:text="@string/zero"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
                                     android:textColor="@android:color/white"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                                    android:textSize="15sp" />
                             </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Recovered"
+                                android:text="@string/recovered"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/green_500" />
+                                android:textColor="@color/green_500"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -311,32 +495,33 @@
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
                                     app:backgroundTint="@color/red_600"
                                     app:elevation="0dp"
-                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
+                                    app:fabSize="normal"
+                                    app:rippleColor="@android:color/white" />
 
                                 <TextView
+                                    android:id="@+id/deaths_total_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="0"
                                     android:elevation="16dp"
-                                    android:textSize="15sp"
-                                    android:id="@+id/deaths_total_tv"
+                                    android:text="@string/zero"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
                                     android:textColor="@android:color/white"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                                    android:textSize="15sp" />
                             </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Deaths"
-                                android:textStyle="bold"
+                                android:text="@string/deaths"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/red_400" />
+                                android:textColor="@color/red_400"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -349,16 +534,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/lastupdated_dist"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="end"
                             android:singleLine="true"
-                            android:gravity="right"
-                            android:text="Last Updated" />
+                            android:text="@string/last_updated" />
 
                     </LinearLayout>
 
@@ -366,87 +551,88 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:textStyle="bold"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/state_name"
-                        android:text="Your State" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="↑"
-                        android:textStyle="bold"
-                        android:id="@+id/arrow4"
-                        android:textSize="20sp"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/blue_500" />
+                        android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/state_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            android:layout_marginLeft="2dp"
-                            android:text="0"
+                            android:layout_marginStart="7dp"
+                            android:text="@string/your_state"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/arrow4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/arrowup"
+                            android:textColor="@color/blue_500"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/delataincrease_dist"
-                            android:textColor="@color/blue_500" />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="↑"
+                            android:layout_marginStart="2dp"
+                            android:text="@string/zero"
+                            android:textColor="@color/blue_500"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/arrow5"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="5dp"
-                            android:textColor="@color/green_500" />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            android:layout_marginLeft="2dp"
-                            android:text="0"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/arrowup"
+                            android:textColor="@color/green_500"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/recovered_delataincrease_dist"
-                            android:textColor="@color/green_500" />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="↑"
-                            android:id="@+id/arrow6"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:layout_marginLeft="5dp"
-                            android:textColor="@color/red_500" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:layout_marginStart="2dp"
+                            android:text="@string/zero"
+                            android:textColor="@color/green_500"
                             android:textSize="15sp"
-                            android:layout_marginLeft="2dp"
-                            android:text="0"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/arrow6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/arrowup"
+                            android:textColor="@color/red_500"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/deathgs_delataincrease_dist"
-                            android:textColor="@color/red_500" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="@string/zero"
+                            android:textColor="@color/red_500"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="9dp" />
+                        android:layout_height="5dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -462,32 +648,33 @@
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
                                     app:backgroundTint="@color/blue_400"
                                     app:elevation="0dp"
-                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
+                                    app:fabSize="normal"
+                                    app:rippleColor="@android:color/white" />
 
                                 <TextView
+                                    android:id="@+id/total_state_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="0"
                                     android:elevation="16dp"
-                                    android:textSize="15sp"
-                                    android:id="@+id/total_state_tv"
+                                    android:text="@string/zero"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
                                     android:textColor="@android:color/white"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                                    android:textSize="15sp" />
                             </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:textStyle="bold"
-                                android:text="Confirmed"
+                                android:text="@string/confirmed"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/blue_400" />
+                                android:textColor="@color/blue_400"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -496,7 +683,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            tools:ignore="TooManyViews">
 
                             <FrameLayout
                                 android:layout_width="wrap_content"
@@ -505,33 +693,33 @@
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
                                     app:backgroundTint="@color/yellow_600"
                                     app:elevation="0dp"
                                     app:fabSize="normal"
-                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
+                                    app:rippleColor="@android:color/white" />
 
                                 <TextView
+                                    android:id="@+id/active_state_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="0"
-                                    android:textSize="15sp"
                                     android:elevation="16dp"
-                                    android:id="@+id/active_state_tv"
+                                    android:text="@string/zero"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
                                     android:textColor="@color/dark"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                                    android:textSize="15sp" />
                             </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:textStyle="bold"
-                                android:text="Active"
+                                android:text="@string/active"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/grey_40" />
+                                android:textColor="@color/grey_40"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -549,32 +737,33 @@
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
                                     app:backgroundTint="@color/light_green_400"
                                     app:elevation="0dp"
-                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
+                                    app:fabSize="normal"
+                                    app:rippleColor="@android:color/white" />
 
                                 <TextView
+                                    android:id="@+id/recovered_state_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="0"
                                     android:elevation="16dp"
-                                    android:textSize="15sp"
-                                    android:id="@+id/recovered_state_tv"
+                                    android:text="@string/zero"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
                                     android:textColor="@android:color/white"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                                    android:textSize="15sp" />
                             </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:textStyle="bold"
-                                android:text="Recovered"
+                                android:text="@string/recovered"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/green_500" />
+                                android:textColor="@color/green_500"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -592,43 +781,42 @@
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
                                     app:backgroundTint="@color/red_600"
                                     app:elevation="0dp"
-                                    app:fabSize="normal"                                    app:rippleColor="@android:color/white"
-                                    android:src="@android:color/transparent" />
+                                    app:fabSize="normal"
+                                    app:rippleColor="@android:color/white" />
 
                                 <TextView
+                                    android:id="@+id/deaths_state_tv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="0"
                                     android:elevation="16dp"
-                                    android:textSize="15sp"
-                                    android:id="@+id/deaths_state_tv"
+                                    android:text="@string/zero"
+                                    android:textAppearance="?android:attr/textAppearanceMedium"
                                     android:textColor="@android:color/white"
-                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                                    android:textSize="15sp" />
                             </FrameLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="Deaths"
-                                android:textStyle="bold"
+                                android:text="@string/deaths"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/red_400" />
+                                android:textColor="@color/red_400"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
-
-
 
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="10dp" />
+                        android:layout_height="5dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -637,32 +825,31 @@
                         android:orientation="horizontal">
 
 
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Confirmed in "
-                            android:layout_marginLeft="7dp"
+                            android:layout_marginStart="7dp"
+                            android:text="@string/confirmed_in"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                             android:textColor="@color/grey_60" />
 
                         <TextView
+                            android:id="@+id/city_conformed"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Guntur"
-                            android:id="@+id/city_conformed"
+                            android:text="@string/guntur"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                             android:textColor="@color/grey_60" />
 
                         <TextView
+                            android:id="@+id/city_conformed_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1"
-                            android:textStyle="bold"
-                            android:id="@+id/city_conformed_num"
+                            android:text="@string/zero"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
-                            android:textColor="@color/blue_500" />
+                            android:textColor="@color/blue_500"
+                            android:textStyle="bold" />
 
                         <View
                             android:layout_width="@dimen/spacing_large"
@@ -678,10 +865,41 @@
                 android:layout_width="0dp"
                 android:layout_height="3dp" />
 
+            <LinearLayout
+                android:id="@+id/lyt_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/spacing_medium"
+                android:layout_marginBottom="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/gettingdata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/getting_data"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/colorAccent" />
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="3dp" />
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/recview" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

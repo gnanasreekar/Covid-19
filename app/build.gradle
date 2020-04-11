@@ -9,8 +9,8 @@ android {
         applicationId "com.rgs.covid_19"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -21,6 +21,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+}
+
+repositories {
+    maven {
+        url 'https://jitpack.io'
     }
 
 }
@@ -48,6 +55,10 @@ dependencies {
     // Recommended: Add the Firebase SDK for Google Analytics.
     implementation 'com.google.firebase:firebase-analytics:17.3.0'
     // To get data
+    implementation 'com.github.GrenderG:Toasty:1.4.2'                       // Toast on steroids
+    implementation 'com.github.florent37:expansionpanel:1.2.2'
+
+    implementation 'com.github.mreram:showcaseview:1.1'
 
     // Add the Firebase SDK for Crashlytics.
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta03'

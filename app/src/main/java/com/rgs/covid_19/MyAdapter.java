@@ -1,5 +1,6 @@
 package com.rgs.covid_19;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -15,17 +16,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rgs.covid_19.dist.Dist;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<MOdel> listData;
-    Context context;
+    private Context context;
 
-    public void setlist(List<MOdel> listData) {
+    void setlist(List<MOdel> listData) {
         this.listData = listData;
     }
 
-    public MyAdapter(Context context) {
+    MyAdapter(Context context) {
         this.context = context;
     }
 
@@ -36,13 +41,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+
         final MOdel ld = listData.get(position);
-        final String active = ld.getActive();
-        final String recovered = ld.getRecovered();
-        final String deaths = ld.getDeaths();
-        final String total = ld.getConfirmed();
+
+        try {
+
+            final String recovered = formatter.format(numberFormat.parse(ld.getRecovered()).intValue());
+            final String deaths = formatter.format(numberFormat.parse(ld.getDeaths()).intValue());
+            final String total = formatter.format(numberFormat.parse(ld.getConfirmed()).intValue());
+            final String active = formatter.format(numberFormat.parse(ld.getActive()).intValue());
+            holder.recViewActive.setText("Active: "+active);
+            holder.recViewDeath.setText("Deaths: "+deaths);
+            holder.recViewRecovered.setText("Recovered: "+recovered);
+            holder.recViewTotal.setText("Total: "+total);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         final String state = ld.getState();
         final String deltaconformed = ld.getDeltaconformed();
         final String deltadeaths = ld.getDeltadeath();
@@ -66,12 +86,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.rec_delta_conformed.setText(deltaconformed);
         holder.rec_delta_recovered.setText(deltarecovered);
         holder.rec_delta_deaths.setText(deltadeaths);
-        holder.recViewActive.setText("Active: "+active);
-        holder.recViewDeath.setText("Deaths: "+deaths);
-        holder.recViewRecovered.setText("Recovered: "+recovered);
-        holder.statenameRec.setText(state);
-        holder.recViewTotal.setText("Total: "+total);
 
+        holder.statenameRec.setText(state);
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

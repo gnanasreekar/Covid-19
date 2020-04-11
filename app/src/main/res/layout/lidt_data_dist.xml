@@ -21,10 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/spacing_large">
+            android:padding="@dimen/spacing_large"
+            android:baselineAligned="false">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -33,7 +34,7 @@
                     android:id="@+id/distname_rec"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="State"
+                    android:text="@string/state"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@color/green_400"
                     android:textStyle="bold" />
@@ -44,7 +45,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
@@ -61,7 +62,7 @@
                         android:id="@+id/rec_view_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total:"
+                        android:text="@string/total"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                         android:textColor="@android:color/white" />
 

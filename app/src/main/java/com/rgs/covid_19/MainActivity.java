@@ -1,5 +1,6 @@
 package com.rgs.covid_19;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -16,6 +17,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -27,6 +30,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +43,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.annotation.Target;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -48,11 +54,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import smartdevelop.ir.eram.showcaseviewlib.GuideView;
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType;
+import smartdevelop.ir.eram.showcaseviewlib.config.Gravity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,16 +72,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> list_dist_wise = new ArrayList<String>();
     private List<MOdel> states;
 
-    String myResponse;
+    String myResponse, world_myResponse;
 
-    private TextView india_active_tv;
-    private TextView india_deaths_tv;
-    private TextView india_recovered_tv;
-    private TextView india_confirmed;
-    private TextView state_active_tv;
-    private TextView state_death_tv;
-    private TextView state_recovered_tv;
-    private TextView state_confirmed_tv;
+
     TextView lastupdated_data_tv, selected_state_name, selected_dist, selected_dist_number;
     private MyAdapter adapter;
     private RecyclerView rv;
@@ -93,12 +96,29 @@ public class MainActivity extends AppCompatActivity {
     private TextView arrow4;
     private TextView arrow5;
     private TextView arrow6;
-
-
-    AlarmManager alarmManager;
-    PendingIntent pendingIntent;
+    private TextView india_active_tv;
+    private TextView india_deaths_tv;
+    private TextView india_recovered_tv;
+    private TextView india_confirmed;
+    private TextView state_active_tv;
+    private TextView state_death_tv;
+    private TextView state_recovered_tv;
+    private TextView state_confirmed_tv;
+    private TextView worldConfirmed;
+    private TextView worldRecovered;
+    private TextView worldDeaths;
+    private TextView newArrow1;
+    private TextView newWorldConfirmed;
+    private TextView newArrow2;
+    private TextView newWorldRecovered;
+    private TextView newArrow3;
+    private TextView newWorldDeaths;
     CharSequence s;
+    private LinearLayout lytProgress;
 
+    DecimalFormat formatter;
+    private LinearLayout worldLayout;
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +133,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         //  MobileAds.initialize(this, "ca-app-pub-4057093668636373~8007114541");
+        formatter = new DecimalFormat("#,###,###");
 
+        lytProgress = findViewById(R.id.lyt_progress);
         sharedPreferences = getApplicationContext().getSharedPreferences("sp", 0);
         editor = sharedPreferences.edit();
         rv = (RecyclerView) findViewById(R.id.recview);
@@ -145,6 +167,19 @@ public class MainActivity extends AppCompatActivity {
         delta_state_deaths = findViewById(R.id.deathgs_delataincrease_dist);
         delta_state_confirmed = findViewById(R.id.delataincrease_dist);
 
+        worldConfirmed = findViewById(R.id.world_confirmed);
+        worldRecovered = findViewById(R.id.world_recovered);
+        worldDeaths = findViewById(R.id.world_deaths);
+
+        newArrow1 = findViewById(R.id.new_arrow1);
+        newWorldConfirmed = findViewById(R.id.new_world_confirmed);
+        newArrow2 = findViewById(R.id.new_arrow2);
+        newWorldRecovered = findViewById(R.id.new_world_recovered);
+        newArrow3 = findViewById(R.id.new_arrow3);
+        newWorldDeaths = findViewById(R.id.new_world_deaths);
+        worldLayout = findViewById(R.id.world_layout);
+
+
         arrow1 = findViewById(R.id.arrow1);
         arrow2 = findViewById(R.id.arrow2);
         arrow3 = findViewById(R.id.arrow3);
@@ -152,129 +187,264 @@ public class MainActivity extends AppCompatActivity {
         arrow5 = findViewById(R.id.arrow5);
         arrow6 = findViewById(R.id.arrow6);
 
-        OkHttpClient client = new OkHttpClient();
+        //Checking for Internet
+        if (!isNetworkAvailable()) {
+            myResponse = sharedPreferences.getString("response", "");
+            world_myResponse = sharedPreferences.getString("world_response", "");
+            dataset();
+            worlddataset();
+            Toasty.warning(this, "Internet not available, Showing previous data ", Toast.LENGTH_LONG, true).show();
+        } else {
 
-        Request request = new Request.Builder()
-                .url("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india")
-                .get()
-                .addHeader("x-rapidapi-host", "corona-virus-world-and-india-data.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "181e3419demshd0ce128fad4555cp134882jsn58cb1669cb39")
-                .build();
+            OkHttpClient world_client = new OkHttpClient();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                call.cancel();
-            }
+            Request world_request = new Request.Builder()
+                    .url("https://api.covid19api.com/summary")
+                    .get()
+                    .build();
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            world_client.newCall(world_request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    call.cancel();
+                }
 
-                myResponse = response.body().string();
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
 
-                MainActivity.this.runOnUiThread(new Runnable() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void run() {
+                    world_myResponse = response.body().string();
+                    editor.putString("world_response", world_myResponse);
+                    editor.apply();
+                    Log.d("Dataaaaa" , world_myResponse);
+                    worlddataset();
 
-                        try {
-
-                            final JSONObject jsonObject = new JSONObject(myResponse);
-                            JSONObject valuesarray = jsonObject.getJSONObject("total_values");
-                            String active = valuesarray.getString("active");
-                            String confirmed = valuesarray.getString("confirmed");
-                            String deaths = valuesarray.getString("deaths");
-                            String deltaconfirmed = valuesarray.getString("deltaconfirmed");
-                            String deltadeaths = valuesarray.getString("deltadeaths");
-                            String deltarecovered = valuesarray.getString("deltarecovered");
-                            String lastupdatedtime = valuesarray.getString("lastupdatedtime");
-                            String recovered = valuesarray.getString("recovered");
-                            String state = valuesarray.getString("state");
-                            String statecode = valuesarray.getString("statecode");
+                }
+            });
 
 
-                            editor.putString("conformed_india", confirmed);
-                            editor.apply();
 
-                            Date d = new Date();
-                            s = DateFormat.format("dd/MM/yyyy", d.getTime());
-                            String[] parts = lastupdatedtime.split(" ");
+            OkHttpClient client = new OkHttpClient();
 
-                            if (parts[0].equals(s)){
-                                lastupdated_data_tv.setText("Last updated: Today " + parts[1]);
-                            } else {
-                                lastupdated_data_tv.setText("Last updated: " + lastupdatedtime);
-                            }
+            Request request = new Request.Builder()
+                    .url("https://corona-virus-world-and-india-data.p.rapidapi.com/api_india")
+                    .get()
+                    .addHeader("x-rapidapi-host", "corona-virus-world-and-india-data.p.rapidapi.com")
+                    .addHeader("x-rapidapi-key", "181e3419demshd0ce128fad4555cp134882jsn58cb1669cb39")
+                    .build();
 
-                            if (deltaconfirmed.equals("0")) {
-                                delta_india_confirmed.setVisibility(View.GONE);
-                                arrow1.setVisibility(View.GONE);
-                            }
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    call.cancel();
+                }
 
-                            if (deltadeaths.equals("0")) {
-                                delta_india_deaths.setVisibility(View.GONE);
-                                arrow3.setVisibility(View.GONE);
-                            }
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
 
-                            if (deltarecovered.equals("0")) {
-                                delta_india_recovered.setVisibility(View.GONE);
-                                arrow2.setVisibility(View.GONE);
-                            }
+                    myResponse = response.body().string();
+                    editor.putString("response", myResponse);
+                    editor.apply();
+                    dataset();
 
-                            delta_india_recovered.setText(deltarecovered);
-                            delta_india_deaths.setText(deltadeaths);
-                            delta_india_confirmed.setText(deltaconfirmed);
+                }
+            });
+        }
 
-                            india_active_tv.setText(active);
-                            india_deaths_tv.setText(deaths);
-                            india_recovered_tv.setText(recovered);
-                            india_confirmed.setText(confirmed);
-
-
-                            list_state_wise.clear();
-
-
-                            try {
-                                JSONObject state_wise = jsonObject.getJSONObject("state_wise");
-
-                                for (String key : iterate(state_wise.keys())) {
-                                    list_state_wise.add(key);
-                                }
-
-                                if (!sharedPreferences.getBoolean("firstTime", false)) {
-                                    stateselectdialog();
-                                    editor.putBoolean("firstTime", true);
-                                    editor.apply();
-                                    rec();
-                                } else {
-                                    distdataset();
-                                    rec();
-                                }
-
-                                editor.putString("data", myResponse);
-                                editor.apply();
-
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                });
-
-            }
-        });
+        if (!sharedPreferences.getBoolean("worldlayout" , true)) {
+            worldLayout.setVisibility(View.GONE);
+        }
 
         createNotificationChannels();
-//        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-//        Log.d("Firebaseeeeeeeeeeeee", "Refreshed token: " + refreshedToken);
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d("Firebaseeeeeeeeeeeee", "Refreshed token: " + refreshedToken);
+
+
+
+
 
     }
 
+    public void worlddataset(){
+
+        MainActivity.this.runOnUiThread(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void run() {
+
+                try {
+
+                    JSONObject jsonObject = new JSONObject(world_myResponse);
+                    JSONObject global = jsonObject.getJSONObject("Global");
+                    String world_deaths = global.getString("TotalDeaths");
+                    String world_recovered = global.getString("TotalRecovered");
+                    String world_confirmed = global.getString("TotalConfirmed");
+                    String world_new_deaths = global.getString("NewDeaths");
+                    String world_new_recovered = global.getString("NewRecovered");
+                    String world_new_confirmed = global.getString("NewConfirmed");
+
+                    if (world_new_deaths.equals("0")) {
+                        newWorldDeaths.setVisibility(View.GONE);
+                        newArrow3.setVisibility(View.GONE);
+                    }
+
+                    if (world_new_recovered.equals("0")) {
+                        newWorldRecovered.setVisibility(View.GONE);
+                        newArrow2.setVisibility(View.GONE);
+                    }
+
+                    if (world_new_confirmed.equals("0")) {
+                        newWorldConfirmed.setVisibility(View.GONE);
+                        newArrow1.setVisibility(View.GONE);
+                    }
+
+
+
+                    try {
+                        worldDeaths.setText(formatter.format(numberFormat.parse(world_deaths).intValue()));
+                        worldConfirmed.setText(formatter.format(numberFormat.parse(world_confirmed).intValue()));
+                        worldRecovered.setText(formatter.format(numberFormat.parse(world_recovered).intValue()));
+                        newWorldDeaths.setText(formatter.format(numberFormat.parse(world_new_deaths).intValue()));
+                        newWorldRecovered.setText(formatter.format(numberFormat.parse(world_new_recovered).intValue()));
+                        newWorldConfirmed.setText(formatter.format(numberFormat.parse(world_new_confirmed).intValue()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void disworld(){
+        if (worldLayout.getVisibility() == View.VISIBLE){
+            worldLayout.setVisibility(View.GONE);
+            editor.putBoolean("worldlayout" , false);
+            menu.findItem(R.id.disableworld).setTitle("Enable World Stats?");
+        } else {
+            worldLayout.setVisibility(View.VISIBLE);
+            editor.putBoolean("worldlayout" , true);
+            menu.findItem(R.id.disableworld).setTitle("Disable World Stats?");
+        }
+        editor.apply();
+    }
+
+    public void dataset(){
+
+
+
+        MainActivity.this.runOnUiThread(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void run() {
+
+                //Toggle
+                if (lytProgress.getVisibility() == View.VISIBLE)
+                    lytProgress.setVisibility(View.GONE);
+                else
+                    lytProgress.setVisibility(View.VISIBLE);
+
+                try {
+
+                    final JSONObject jsonObject = new JSONObject(myResponse);
+                    JSONObject valuesarray = jsonObject.getJSONObject("total_values");
+                    String active = valuesarray.getString("active");
+                    String confirmed = valuesarray.getString("confirmed");
+                    String deaths = valuesarray.getString("deaths");
+                    String deltaconfirmed = valuesarray.getString("deltaconfirmed");
+                    String deltadeaths = valuesarray.getString("deltadeaths");
+                    String deltarecovered = valuesarray.getString("deltarecovered");
+                    String lastupdatedtime = valuesarray.getString("lastupdatedtime");
+                    String recovered = valuesarray.getString("recovered");
+                    String state = valuesarray.getString("state");
+                    String statecode = valuesarray.getString("statecode");
+
+
+                    editor.putString("conformed_india", confirmed);
+                    editor.apply();
+
+                    Date d = new Date();
+                    s = DateFormat.format("dd/MM/yyyy", d.getTime());
+                    String[] parts = lastupdatedtime.split(" ");
+
+                    if (parts[0].equals(s)){
+                        lastupdated_data_tv.setText("Last updated: Today " + parts[1]);
+                    } else {
+                        lastupdated_data_tv.setText("Last updated: " + lastupdatedtime);
+                    }
+
+                    if (deltaconfirmed.equals("0")) {
+                        delta_india_confirmed.setVisibility(View.GONE);
+                        arrow1.setVisibility(View.GONE);
+                    }
+
+                    if (deltadeaths.equals("0")) {
+                        delta_india_deaths.setVisibility(View.GONE);
+                        arrow3.setVisibility(View.GONE);
+                    }
+
+                    if (deltarecovered.equals("0")) {
+                        delta_india_recovered.setVisibility(View.GONE);
+                        arrow2.setVisibility(View.GONE);
+                    }
+
+                    delta_india_recovered.setText(formatter.format(numberFormat.parse(deltarecovered).intValue()));
+                    delta_india_deaths.setText(formatter.format(numberFormat.parse(deltadeaths).intValue()));
+                    delta_india_confirmed.setText(formatter.format(numberFormat.parse(deltaconfirmed).intValue()));
+
+                    india_active_tv.setText(formatter.format(numberFormat.parse(active).intValue()));
+                    india_deaths_tv.setText(formatter.format(numberFormat.parse(deaths).intValue()));
+                    india_recovered_tv.setText(formatter.format(numberFormat.parse(recovered).intValue()));
+                    india_confirmed.setText(formatter.format(numberFormat.parse(confirmed).intValue()));
+
+                    list_state_wise.clear();
+
+
+                    try {
+                        JSONObject state_wise = jsonObject.getJSONObject("state_wise");
+
+                        for (String key : iterate(state_wise.keys())) {
+                            list_state_wise.add(key);
+                        }
+
+                        if (!sharedPreferences.getBoolean("firstTime", false)) {
+                            stateselectdialog();
+                            editor.putBoolean("firstTime", true);
+                            editor.apply();
+                            rec();
+                        } else {
+                            distdataset();
+                            rec();
+                        }
+
+                        editor.putString("data", myResponse);
+                        editor.apply();
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+    //Checking for internet
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
     private void createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -287,7 +457,7 @@ public class MainActivity extends AppCompatActivity {
             notificationManager.createNotificationChannel(notificationChannel);
             // The id of the group.
             String groupId = "my_group_01";
-// The user-visible name of the group.
+            // The user-visible name of the group.
             CharSequence groupName = "Hello";
             NotificationManager mnotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             mnotificationManager.createNotificationChannelGroup(new NotificationChannelGroup(groupId, groupName));
@@ -406,12 +576,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void distdataset() {
+
+
+
         try {
             JSONObject jsonObject = new JSONObject(myResponse);
             JSONObject state_wise = jsonObject.getJSONObject("state_wise");
             JSONObject state_data = state_wise.getJSONObject(sharedPreferences.getString("state", "Andhra Pradesh"));
-            JSONObject state_data_in = state_data.getJSONObject("district");
-            JSONObject state_dist_data_in = state_data_in.getJSONObject(sharedPreferences.getString("dist", "Guntur"));
+
 
             String active = state_data.getString("active");
             String confirmed = state_data.getString("confirmed");
@@ -450,20 +622,25 @@ public class MainActivity extends AppCompatActivity {
                 lastupdated_dist_tv.setText("Last updated: " + lastupdatedtime_dist);
             }
 
-            delta_state_recovered.setText(delta_recovered);
-            delta_state_deaths.setText(delta_deaths);
-            delta_state_confirmed.setText(delta_confirmed);
+            delta_state_recovered.setText(formatter.format(numberFormat.parse(delta_recovered).intValue()));
+            delta_state_deaths.setText(formatter.format(numberFormat.parse(delta_deaths).intValue()));
+            delta_state_confirmed.setText(formatter.format(numberFormat.parse(delta_confirmed).intValue()));
 
-            state_death_tv.setText(deaths);
-            state_recovered_tv.setText(recovered);
-            state_confirmed_tv.setText(confirmed);
-            state_active_tv.setText(active);
+            state_death_tv.setText(formatter.format(numberFormat.parse(deaths).intValue()));
+            state_recovered_tv.setText(formatter.format(numberFormat.parse(recovered).intValue()));
+            state_confirmed_tv.setText(formatter.format(numberFormat.parse(confirmed).intValue()));
+            state_active_tv.setText(formatter.format(numberFormat.parse(active).intValue()));
+
             selected_state_name.setText(state + " Today");
+
+            JSONObject state_data_in = state_data.getJSONObject("district");
+            JSONObject state_dist_data_in = state_data_in.getJSONObject(sharedPreferences.getString("dist", "Guntur"));
+
             selected_dist_number.setText(state_dist_data_in.getString("confirmed"));
             cases = numberFormat.parse(state_dist_data_in.getString("confirmed")).intValue();
 
-            if (!sharedPreferences.getBoolean("firstTime", false)) {
-                editor.putBoolean("firstTime", true);
+            if (!sharedPreferences.getBoolean("firstTime1", false)) {
+                editor.putBoolean("firstTime1", true);
                 editor.apply();
             } else {
                 if (sharedPreferences.getInt("cases", 0) < cases) {
@@ -545,17 +722,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
+        this.menu = menu;
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if (item.getItemId() == R.id.changestate) {
             stateselectdialog();
         } else if (item.getItemId() == R.id.feedback) {
             startActivity(new Intent(MainActivity.this, Feedback.class));
         } else if (item.getItemId() == R.id.about) {
             startActivity(new Intent(MainActivity.this, About.class));
+        } else if (item.getItemId() == R.id.disableworld) {
+            disworld();
         }
         return super.onOptionsItemSelected(item);
     }
