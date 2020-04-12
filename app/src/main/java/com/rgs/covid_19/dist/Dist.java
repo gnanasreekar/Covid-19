@@ -61,7 +61,7 @@ public class Dist extends AppCompatActivity {
                 }
             } else {
 
-                Spanned styledText = Html.fromHtml("District data not available for <b>" + getIntent().getStringExtra("state") + "<b>");
+                Spanned styledText = Html.fromHtml("No positive cases registered in <b>" + getIntent().getStringExtra("state") + "<b>");
                 Toasty.info(this, styledText, Toast.LENGTH_LONG, true).show();
                 finish();
             }

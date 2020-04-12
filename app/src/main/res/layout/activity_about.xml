@@ -281,7 +281,7 @@
                         app:civ_shadow_radius="0" />
 
                     <com.roger.match.library.MatchTextView
-                        match:text="Gnana Sreekar"
+                        match:text="Gnana sreekar"
                         match:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -342,6 +342,18 @@
                             android:tint="@color/grey_20"
                             android:id="@+id/mail_rgs"
                             android:src="@drawable/ic_mail_outline_black_24dp" />
+
+                        <View
+                            android:layout_width="@dimen/spacing_xlarge"
+                            android:layout_height="0dp" />
+
+                        <ImageButton
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:tint="@color/grey_20"
+                            android:id="@+id/web_rgs"
+                            android:src="@drawable/ic_web_black_24dp" />
 
 
 

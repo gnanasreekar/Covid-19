@@ -239,6 +239,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textSize="12sp"
                             android:singleLine="true"
                             android:text="@string/last_updated" />
 
@@ -522,6 +523,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="end"
+                            android:textSize="12sp"
                             android:singleLine="true"
                             android:text="@string/last_updated" />
 
@@ -799,8 +801,9 @@
                         android:layout_height="5dp" />
 
                     <LinearLayout
+                        android:id="@+id/state_layout"
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
@@ -815,19 +818,42 @@
 
                         <TextView
                             android:id="@+id/city_conformed"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginStart="3dp"
                             android:text="@string/guntur"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                             android:textColor="@color/grey_60" />
 
                         <TextView
+                            android:id="@+id/new_arrow9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/arrowup"
+                            android:layout_marginBottom="4dp"
+                            android:textColor="@color/blue_500"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/new_dist_confirmed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:text="@string/zero"
+                            android:textColor="@color/blue_500"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
                             android:id="@+id/city_conformed_num"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/zero"
+                            android:layout_weight="1"
+                            android:layout_gravity="end"
+                            android:gravity="end"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                             android:textColor="@color/blue_500"
                             android:textStyle="bold" />
@@ -880,6 +906,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recview"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
                 android:layout_height="match_parent" />
 
         </LinearLayout>

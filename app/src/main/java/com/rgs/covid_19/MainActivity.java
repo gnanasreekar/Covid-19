@@ -1,6 +1,5 @@
 package com.rgs.covid_19;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -12,7 +11,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
@@ -62,16 +62,14 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> list_state_wise = new ArrayList<>();
     ArrayList<String> list_dist_wise = new ArrayList<>();
     private List<MOdel> states;
-
     String myResponse, world_myResponse;
 
-
     TextView lastupdated_data_tv, selected_state_name, selected_dist, selected_dist_number;
-    private MyAdapter adapter;
-    private RecyclerView rv;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+    private MyAdapter adapter;
+    private RecyclerView rv;
     int cases;
     private TextView delta_india_confirmed;
     private TextView delta_state_confirmed;
@@ -101,11 +99,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView newWorldConfirmed;
     private TextView newArrow3;
     private TextView newWorldDeaths;
-    CharSequence s;
+    private TextView newArrow9;
+    private TextView newDistConfirmed;
+    private LinearLayout stateLayout;
     private LinearLayout lytProgress;
-
-    DecimalFormat formatter;
     private LinearLayout worldLayout;
+
+    CharSequence s;
+    DecimalFormat formatter;
     Menu menu;
 
     @Override
@@ -154,12 +155,16 @@ public class MainActivity extends AppCompatActivity {
         worldConfirmed = findViewById(R.id.world_confirmed);
         worldRecovered = findViewById(R.id.world_recovered);
         worldDeaths = findViewById(R.id.world_deaths);
+        newArrow9 = findViewById(R.id.new_arrow9);
+        newDistConfirmed = findViewById(R.id.new_dist_confirmed);
+
 
         newArrow1 = findViewById(R.id.new_arrow1);
         newWorldConfirmed = findViewById(R.id.new_world_confirmed);
         newArrow3 = findViewById(R.id.new_arrow3);
         newWorldDeaths = findViewById(R.id.new_world_deaths);
         worldLayout = findViewById(R.id.world_layout);
+        stateLayout = findViewById(R.id.state_layout);
 
 
         arrow1 = findViewById(R.id.arrow1);
@@ -271,8 +276,6 @@ public class MainActivity extends AppCompatActivity {
                         newWorldConfirmed.setVisibility(View.GONE);
                         newArrow1.setVisibility(View.GONE);
                     }
-
-
 
                     try {
                         worldDeaths.setText(formatter.format(numberFormat.parse(world_deaths).intValue()));
@@ -500,57 +503,67 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(myResponse);
             JSONObject state_wise = jsonObject.getJSONObject("state_wise");
             JSONObject state_data = state_wise.getJSONObject(st);
-            JSONObject state_data_in = state_data.getJSONObject("district");
 
+            if (state_data.has("district")){
 
-            for (String key : iterate(state_data_in.keys())) {
+                JSONObject state_data_in = state_data.getJSONObject("district");
 
-                list_dist_wise.add(key);
+                for (String key : iterate(state_data_in.keys())) {
+                    list_dist_wise.add(key);
+                }
+
+                final Dialog dialog = new Dialog(this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+                dialog.setContentView(R.layout.userslist);
+                dialog.setCancelable(true);
+
+                ListView lv;
+                lv = (ListView) dialog.findViewById(R.id.listviewaa);
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_dist_wise);
+
+                lv.setAdapter(arrayAdapter);
+
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        editor.putString("dist", list_dist_wise.get(position));
+                        editor.apply();
+                        distdataset();
+                        Toast.makeText(MainActivity.this, list_dist_wise.get(position), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+                WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+                lp.copyFrom(dialog.getWindow().getAttributes());
+                lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+                dialog.show();
+                dialog.getWindow().setAttributes(lp);
+            } else {
+                editor.putString("dist", "0");
+                editor.apply();
+                Spanned styledText = Html.fromHtml("No positive cases registered in <b>" + st + "<b>");
+                Toasty.info(this, styledText, Toast.LENGTH_LONG, true).show();
+                distdataset();
             }
+
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-        dialog.setContentView(R.layout.userslist);
-        dialog.setCancelable(true);
 
-        ListView lv;
-        lv = (ListView) dialog.findViewById(R.id.listviewaa);
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_dist_wise);
-
-        lv.setAdapter(arrayAdapter);
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //setchange(position);
-                editor.putString("dist", list_dist_wise.get(position));
-                editor.apply();
-                distdataset();
-                Toast.makeText(MainActivity.this, list_dist_wise.get(position), Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-        dialog.show();
-        dialog.getWindow().setAttributes(lp);
     }
 
     public void distdataset() {
 
-
-
         try {
+
             JSONObject jsonObject = new JSONObject(myResponse);
             JSONObject state_wise = jsonObject.getJSONObject("state_wise");
             JSONObject state_data = state_wise.getJSONObject(sharedPreferences.getString("state", "Andhra Pradesh"));
@@ -602,28 +615,47 @@ public class MainActivity extends AppCompatActivity {
             state_confirmed_tv.setText(formatter.format(numberFormat.parse(confirmed).intValue()));
             state_active_tv.setText(formatter.format(numberFormat.parse(active).intValue()));
 
-            selected_state_name.setText(state + " Today");
+            selected_state_name.setText(state + " Today :");
 
-            JSONObject state_data_in = state_data.getJSONObject("district");
-            JSONObject state_dist_data_in = state_data_in.getJSONObject(sharedPreferences.getString("dist", "Guntur"));
+            if (state_data.has("district")){
+                if (stateLayout.getVisibility() == View.GONE){
+                    stateLayout.setVisibility(View.VISIBLE);
+                }
+                JSONObject state_data_in = state_data.getJSONObject("district");
+                JSONObject state_dist_data_in = state_data_in.getJSONObject(sharedPreferences.getString("dist", "0"));
 
-            selected_dist_number.setText(state_dist_data_in.getString("confirmed"));
-            cases = numberFormat.parse(state_dist_data_in.getString("confirmed")).intValue();
+                if (state_dist_data_in.has("delta")) {
+                    JSONObject dist_new = state_dist_data_in.getJSONObject("delta");
 
-            if (!sharedPreferences.getBoolean("firstTime1", false)) {
-                editor.putBoolean("firstTime1", true);
-                editor.apply();
-            } else {
-                if (sharedPreferences.getInt("cases", 0) < cases) {
-                    if (sharedPreferences.getString("dist", "Guntur").equals(selected_dist.getText())) {
-                        increasedialog();
+                    if (dist_new.getString("confirmed").equals("0")){
+                        newArrow9.setVisibility(View.GONE);
+                        newDistConfirmed.setVisibility(View.GONE);
+                    }
+
+                    newDistConfirmed.setText(dist_new.getString("confirmed"));
+                }
+                selected_dist_number.setText(state_dist_data_in.getString("confirmed"));
+                cases = numberFormat.parse(state_dist_data_in.getString("confirmed")).intValue();
+
+                if (!sharedPreferences.getBoolean("firstTime1", false)) {
+                    editor.putBoolean("firstTime1", true);
+                    editor.apply();
+                } else {
+                    if (sharedPreferences.getInt("cases", 0) < cases) {
+                        if (sharedPreferences.getString("dist", "Guntur").equals(selected_dist.getText())) {
+                            increasedialog();
+                        }
                     }
                 }
 
+                editor.putInt("cases", cases);
+                editor.apply();
+                selected_dist.setText(sharedPreferences.getString("dist", "0")+ " :");
+            }  else {
+                if (stateLayout.getVisibility() == View.VISIBLE){
+                    stateLayout.setVisibility(View.GONE);
+                }
             }
-            editor.putInt("cases", cases);
-            editor.apply();
-            selected_dist.setText(sharedPreferences.getString("dist", "Guntur"));
 
         } catch (JSONException | ParseException e) {
             e.printStackTrace();

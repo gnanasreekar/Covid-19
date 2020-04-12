@@ -44,5 +44,14 @@ public class About extends AppCompatActivity {
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
         });
+
+        //Mail_rgs
+        ImageButton web_rgs = findViewById(R.id.web_rgs);
+        web_rgs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gnanasreekar.com")));
+            }
+        });
     }
 }

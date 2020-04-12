@@ -9,8 +9,8 @@
     <string name="loading">Loading…</string>
     <string name="world">World :</string>
     <string name="last_updated">Last Updated</string>
-    <string name="your_state">Your State</string>
-    <string name="total_india_today">Total India Today</string>
+    <string name="your_state">Your State :</string>
+    <string name="total_india_today">Total India Today :</string>
     <string name="confirmed_in">Confirmed in</string>
     <string name="guntur">Guntur</string>
     <string name="getting_data">Getting Data…</string>

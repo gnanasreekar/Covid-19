@@ -14,7 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.rgs.covid_19.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 
 public class MyAdapter_dist extends RecyclerView.Adapter<MyAdapter_dist.ViewHolder> {
     private List<Model_dist> listData;
@@ -38,10 +42,16 @@ public class MyAdapter_dist extends RecyclerView.Adapter<MyAdapter_dist.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Model_dist ld = listData.get(position);
-        final String total = ld.getConfirmed();
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
 
-        holder.recViewTotal.setText("Total: "+total);
-        holder.distnameRec.setText(ld.getKey());
+        try {
+            holder.recViewTotal.setText("Total: "+formatter.format(numberFormat.parse(ld.getConfirmed()).intValue()));
+            holder.distnameRec.setText(ld.getKey());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
