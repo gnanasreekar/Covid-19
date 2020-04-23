@@ -91,7 +91,7 @@
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:layout_marginStart="5dp"
-                        android:textColor="@color/red_500" />
+                        android:textColor="@color/grey_20" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                         android:layout_marginStart="2dp"
                         android:textSize="15sp"
                         android:id="@+id/rec_deathgs_delataincrease_dist"
-                        android:textColor="@color/red_500" />
+                        android:textColor="@color/grey_20" />
 
 
                 </LinearLayout>
@@ -199,7 +199,7 @@
                     android:id="@+id/rec_view_layout_death"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_rounded_red"
+                    android:background="@drawable/shape_rounded_grey"
                     android:paddingLeft="@dimen/spacing_xmedium"
                     android:paddingTop="@dimen/spacing_small"
                     android:paddingRight="@dimen/spacing_xmedium"

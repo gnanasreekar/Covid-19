@@ -68,7 +68,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Covid-19 India tracker"
+                                android:text="@string/covid_19_tracker_india"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                                 android:textColor="@color/grey_80" />
 
@@ -110,7 +110,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Last Updated"
+                                android:text="@string/last_updated"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_80"
                                 app:fontFamily="sans-serif-medium" />
@@ -118,7 +118,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="05 April 2020 07:40 PM"
+                                android:text="@string/_13_april_2020_07_40_pm"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
 
@@ -159,7 +159,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="API Provider:"
+                                android:text="@string/api_provider"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_80"
                                 app:fontFamily="sans-serif-medium" />
@@ -167,7 +167,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="RapidAPI"
+                                android:text="@string/rapidapi"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
 
@@ -208,7 +208,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="API:"
+                                android:text="@string/api"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_80"
                                 app:fontFamily="sans-serif-medium" />
@@ -216,14 +216,21 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Corona virus World and India data"
+                                android:text="@string/ministry_of_heaalth_amp_family_welfare"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="by spamakashrajtech"
+                                android:text="@string/corona_virus_world_and_india_data"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                android:textColor="@color/grey_40" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/by_akash"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
 
@@ -244,8 +251,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Developed by :"
-                android:layout_marginLeft="5dp"
+                android:text="@string/developed_by"
+                android:layout_marginStart="5dp"
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent" />
 
@@ -357,7 +364,6 @@
 
 
 
-
                     </LinearLayout>
 
                     <View
@@ -423,7 +429,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Libraries Used"
+                                android:text="@string/libraries_used"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                                 android:textColor="@color/grey_80"
                                 app:fontFamily="sans-serif-medium" />
@@ -431,7 +437,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Firebase"
+                                android:text="@string/firebase"
                                 android:layout_marginTop="3dp"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
@@ -440,7 +446,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
-                                android:text="OkHttp3"
+                                android:text="@string/okhttp3"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
 
@@ -448,7 +454,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
-                                android:text="Mikhaellopez Circularimageview"
+                                android:text="@string/mikhaellopez_circularimageview"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
 
@@ -456,7 +462,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
-                                android:text="Roger Match Library"
+                                android:text="@string/roger_match_library"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/grey_40" />
 

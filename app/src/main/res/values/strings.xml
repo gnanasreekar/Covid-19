@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Covid-19 India Tracker</string>
+    <string name="app_name">Covid 19 Tracker - India</string>
     <string name="arrowup">↑</string>
     <string name="confirmed">Confirmed</string>
     <string name="active">Active</string>
     <string name="recovered">Recovered</string>
-    <string name="deaths">Deaths</string>
+    <string name="casuality">Casualties</string>
     <string name="zero">0</string>
     <string name="loading">Loading…</string>
     <string name="world">World :</string>
@@ -20,5 +20,19 @@
     <string name="submit">Submit</string>
     <string name="state">State</string>
     <string name="total">Total:</string>
+    <string name="_13_april_2020_07_40_pm">13 April 2020 07:40 PM</string>
+    <string name="libraries_used">Libraries Used</string>
+    <string name="firebase">Firebase</string>
+    <string name="okhttp3">OkHttp3</string>
+    <string name="mikhaellopez_circularimageview">Mikhaellopez Circularimageview</string>
+    <string name="roger_match_library">Roger Match Library</string>
+    <string name="corona_virus_world_and_india_data">Corona virus World and India data</string>
+    <string name="by_akash">by Akash</string>
+    <string name="ministry_of_heaalth_amp_family_welfare">Several api\'s combined into</string>
+    <string name="api">API:</string>
+    <string name="rapidapi">RapidAPI</string>
+    <string name="api_provider">API Provider:</string>
+    <string name="covid_19_tracker_india">COVID 19 Tracker - India</string>
+    <string name="developed_by">Developed by :</string>
 
 </resources>

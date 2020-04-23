@@ -28,10 +28,10 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:subtitle="welcome to Covid-19 tracker for India"
+            app:subtitle="Ministry of Health &amp; Family Welfare"
             app:subtitleTextAppearance="@style/Base.TextAppearance.AppCompat.Caption"
             app:subtitleTextColor="@color/grey_10"
-            app:title="Hey," />
+            app:title="Source:" />
 
     </RelativeLayout>
 
@@ -114,7 +114,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:text="@string/arrowup"
-                                android:textColor="@color/red_500"
+                                android:textColor="@color/grey_20"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
 
@@ -124,7 +124,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="2dp"
                                 android:text="@string/zero"
-                                android:textColor="@color/red_500"
+                                android:textColor="@color/grey_20"
                                 android:textSize="15sp"
                                 android:textStyle="bold" />
 
@@ -172,9 +172,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/spacing_medium"
-                                    android:text="@string/deaths"
+                                    android:text="@string/casuality"
                                     android:layout_marginStart="20dp"
-                                    android:textColor="@color/red_400"
                                     android:textStyle="bold" />
 
                             </LinearLayout>
@@ -215,7 +214,6 @@
                                     android:layout_marginTop="@dimen/spacing_medium"
                                     android:text="@string/loading"
                                     android:layout_marginEnd="30dp"
-                                    android:textColor="@color/red_600"
                                      />
 
                             </LinearLayout>
@@ -303,7 +301,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:text="@string/arrowup"
-                            android:textColor="@color/red_500"
+                            android:textColor="@color/grey_20"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -313,7 +311,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="2dp"
                             android:text="@string/zero"
-                            android:textColor="@color/red_500"
+                            android:textColor="@color/grey_20"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -478,8 +476,8 @@
                                     android:layout_height="wrap_content"
                                     android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
-                                    app:backgroundTint="@color/red_600"
                                     app:elevation="0dp"
+                                    app:backgroundTint="@color/grey_20"
                                     app:fabSize="normal"
                                     app:rippleColor="@android:color/white" />
 
@@ -491,7 +489,7 @@
                                     android:elevation="16dp"
                                     android:text="@string/zero"
                                     android:textAppearance="?android:attr/textAppearanceMedium"
-                                    android:textColor="@android:color/white"
+                                    android:textColor="@android:color/black"
                                     android:textSize="15sp" />
                             </FrameLayout>
 
@@ -499,9 +497,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="@string/deaths"
+                                android:text="@string/casuality"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/red_400"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -589,7 +586,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             android:text="@string/arrowup"
-                            android:textColor="@color/red_500"
+                            android:textColor="@color/grey_20"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -599,7 +596,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="2dp"
                             android:text="@string/zero"
-                            android:textColor="@color/red_500"
+                            android:textColor="@color/grey_20"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -765,7 +762,7 @@
                                     android:layout_height="wrap_content"
                                     android:src="@android:color/transparent"
                                     android:tint="@android:color/white"
-                                    app:backgroundTint="@color/red_600"
+                                    app:backgroundTint="@color/grey_20"
                                     app:elevation="0dp"
                                     app:fabSize="normal"
                                     app:rippleColor="@android:color/white" />
@@ -778,7 +775,7 @@
                                     android:elevation="16dp"
                                     android:text="@string/zero"
                                     android:textAppearance="?android:attr/textAppearanceMedium"
-                                    android:textColor="@android:color/white"
+                                    android:textColor="@android:color/black"
                                     android:textSize="15sp" />
                             </FrameLayout>
 
@@ -786,9 +783,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
-                                android:text="@string/deaths"
+                                android:text="@string/casuality"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                                android:textColor="@color/red_400"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -822,6 +818,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="3dp"
                             android:text="@string/guntur"
+                            android:textStyle="bold"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                             android:textColor="@color/grey_60" />
 
@@ -848,13 +845,13 @@
 
                         <TextView
                             android:id="@+id/city_conformed_num"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:text="@string/zero"
-                            android:layout_weight="1"
                             android:layout_gravity="end"
+                            android:padding="5dp"
+                            android:layout_weight="1"
                             android:gravity="end"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
                             android:textColor="@color/blue_500"
                             android:textStyle="bold" />
 
