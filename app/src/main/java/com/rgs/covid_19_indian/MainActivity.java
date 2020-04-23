@@ -250,8 +250,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         createNotificationChannels();
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d("Firebaseeeeeeeeeeeee", "Refreshed token: " + refreshedToken);
+//        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//        Log.d("Firebaseeeeeeeeeeeee", "Refreshed token: " + refreshedToken);
 
     }
 
