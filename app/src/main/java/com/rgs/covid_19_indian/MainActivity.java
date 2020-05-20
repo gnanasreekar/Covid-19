@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -303,14 +305,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void disworld(){
         if (worldLayout.getVisibility() == View.VISIBLE){
-            worldLayout.setVisibility(View.GONE);
             editor.putBoolean("worldlayout" , false);
             menu.findItem(R.id.disableworld).setTitle("Enable World Stats?");
             Toasty.info(this, "World Data hidden ", Toast.LENGTH_SHORT, true).show();
+
+            worldLayout.setVisibility(View.GONE);
+
         } else {
-            worldLayout.setVisibility(View.VISIBLE);
             editor.putBoolean("worldlayout" , true);
             menu.findItem(R.id.disableworld).setTitle("Disable World Stats?");
+            findViewById(R.id.world_layout).setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_trans));
+            worldLayout.setVisibility(View.VISIBLE);
+
+
         }
         editor.apply();
     }
@@ -350,6 +357,8 @@ public class MainActivity extends AppCompatActivity {
                     Date d = new Date();
                     s = DateFormat.format("dd/MM/yyyy", d.getTime());
                     String[] parts = lastupdatedtime.split(" ");
+
+                    Log.d("TAG", "run: "+ s);
 
                     if (parts[0].equals(s)){
                         lastupdated_data_tv.setText("Last updated: Today " + parts[1]);

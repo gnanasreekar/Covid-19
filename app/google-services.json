@@ -34,6 +34,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:927164208555:android:7781fec0554b9ef1252eee",
+        "android_client_info": {
+          "package_name": "com.rgs.covid_19_indian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "927164208555-h8nn42hiiahqoeek1qc7bqdas8s12r85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLJjRCdAZ1f1NlCPXyA91fm38TGOZUQ0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "927164208555-h8nn42hiiahqoeek1qc7bqdas8s12r85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

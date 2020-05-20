@@ -55,10 +55,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             final String deaths = formatter.format(numberFormat.parse(ld.getDeaths()).intValue());
             final String total = formatter.format(numberFormat.parse(ld.getConfirmed()).intValue());
             final String active = formatter.format(numberFormat.parse(ld.getActive()).intValue());
-            holder.recViewActive.setText("Active: "+active);
-            holder.recViewDeath.setText("Casualties: "+deaths);
-            holder.recViewRecovered.setText("Recovered: "+recovered);
-            holder.recViewTotal.setText("Total: "+total);
+            holder.recViewActive.setText("A: "+active);
+            holder.recViewDeath.setText("C: "+deaths);
+            holder.recViewRecovered.setText("R: "+recovered);
+            holder.recViewTotal.setText("T: "+total);
 
         } catch (ParseException e) {
             e.printStackTrace();
